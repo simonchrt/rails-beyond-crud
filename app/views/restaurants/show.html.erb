@@ -1,0 +1,26 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @restaurant %>
+
+<div>
+  <%= link_to "Edit this restaurant", edit_restaurant_path(@restaurant) %> |
+  <%= link_to "Back to restaurants", restaurants_path %>
+
+  <%= button_to "Destroy this restaurant", @restaurant, method: :delete %>
+</div>
+
+  <%= link_to "Add a review", new_restaurant_review_path(@restaurant) %>
+
+  <%= simple_form_for [@restaurant, @review] do |f| %>
+    <%= f.input :content %>
+    <%= f.submit %>
+  <% end %>
+<div>
+  <ul>
+    <% @restaurant.reviews.each do |review|%>
+      <li> <%= review.content %>  <%= link_to "Delete review", review_path(review), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}  %> </li>
+
+    <% end %>
+  </ul>
+
+</div>
